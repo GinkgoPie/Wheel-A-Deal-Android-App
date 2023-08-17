@@ -95,6 +95,18 @@ val fontFamily = FontFamily(
             lineHeight = 28.sp,
             letterSpacing = 0.sp
         ),
+        labelSmall = TextStyle(
+            fontFamily = fontFamily ,
+            fontWeight = FontWeight.Medium,
+            lineHeight = 18.sp,
+            letterSpacing = 0.sp
+        ),
+        labelLarge = TextStyle(
+            fontFamily = fontFamily ,
+            fontWeight = FontWeight.ExtraBold,
+            lineHeight = 50.sp,
+            letterSpacing = 0.sp
+        ),
 
     )
 

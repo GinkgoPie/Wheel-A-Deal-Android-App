@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">WheelADeal</string>
     <string name="start_button_text">Start</string>
+    <string name="spin_wheel_notification_text">Tap the wheel to spin!</string>
+    <string name="OK_text">OK</string>
+    <string name="app_name_text1">Wheel I</string>
+    <string name="app_name_text2">or</string>
+    <string name="app_name_text3">wheel I not?</string>
+    <string name="wheel_name_request_text">Enter a name for your wheel:</string>
+    <string name="wheel_name_label_text">Wheel Name:</string>
+    <string name="add_choices_request_text">Add choices for </string>
+    <string name="add_choices_label_text">Add a choice here...</string>
+    <string name="selected_choices_text">Selected choice: </string>
+    <string name="share_btn">Save screenshot and share</string>
+
+
 </resources>

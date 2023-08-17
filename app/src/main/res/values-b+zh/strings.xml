@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">超级转转转</string>
+    <string name="start_button_text">开始</string>
+    <string name="spin_wheel_notification_text">点击转盘</string>
+    <string name="OK_text">确认</string>
+    <string name="app_name_text1">转</string>
+    <string name="app_name_text2">还是</string>
+    <string name="app_name_text3">不转</string>
+    <string name="wheel_name_request_text">输入转盘名字:</string>
+    <string name="wheel_name_label_text">转盘:</string>
+    <string name="add_choices_request_text">添加选择 </string>
+    <string name="add_choices_label_text">今晚吃什么...</string>
+    <string name="selected_choices_text">选中了: </string>
+    <string name="share_btn">分享截图</string>
+</resources>
