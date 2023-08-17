@@ -24,10 +24,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.rounded.Star
 import androidx.compose.material.icons.twotone.Clear
-import androidx.compose.material.icons.twotone.Favorite
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -51,7 +48,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -163,6 +159,7 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun WheelNameScreen(navController: NavController) {
+        var valueNotEmpty by remember { mutableStateOf(true) }
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -187,21 +184,35 @@ class MainActivity : ComponentActivity() {
 
             Spacer(modifier = Modifier.weight(1f))
 
+
+
+            if (!valueNotEmpty) {
+                Toast.makeText(LocalContext.current, "Empty value is not allowed.", Toast.LENGTH_LONG).show()
+            }
+
             Button(
-                onClick = { navController.navigate(Screen.AddChoicesScreen.route + "/${textValue.text}") },
+                onClick = {
+                    if (textValue.text.trim() == "") {
+                        valueNotEmpty = !valueNotEmpty
+                    } else {
+                        navController.navigate(Screen.AddChoicesScreen.route + "/${textValue.text}")
+                    }
+                     },
                 modifier = Modifier
                     .align(Alignment.End),
                 colors = ButtonDefaults.buttonColors(Color(0xFF4f518c))
             ) {
                 Icon(imageVector = Icons.Filled.KeyboardArrowRight, contentDescription = "Arrow Right")
             }
+
+
         }
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun AddChoicesScreen(navController: NavController, wheelName: String?) {
-
+        var valueNotEmpty by remember { mutableStateOf(true) }
         val choicesStringList: MutableList<String> = remember { mutableStateListOf() }
 
         Column(
@@ -236,8 +247,11 @@ class MainActivity : ComponentActivity() {
                 Button(
                     colors = ButtonDefaults.buttonColors(Color(0xFF4f518c)),
                     onClick = {
+                        if (textValue.text.trim() == "") {
+                            valueNotEmpty = !valueNotEmpty
+                        } else {
                         choicesStringList.add(textValue.text)
-                        textValue = TextFieldValue("")
+                        textValue = TextFieldValue("")}
                     },
                     modifier = Modifier
                         .padding(start = 8.dp)
@@ -248,6 +262,9 @@ class MainActivity : ComponentActivity() {
 
             Spacer(modifier = Modifier.height(16.dp))
 
+            if (!valueNotEmpty) {
+                Toast.makeText(LocalContext.current, "Empty value is not allowed.", Toast.LENGTH_LONG).show()
+            }
             LazyVerticalGrid(
                 modifier = Modifier.weight(2f),
                 columns = GridCells.Adaptive(minSize = 128.dp)
@@ -371,7 +388,6 @@ class MainActivity : ComponentActivity() {
         )
 
         val scope = rememberCoroutineScope()
-        val chosen = Random(items.size)
         val textList by remember {
             mutableStateOf(items)
         }
@@ -475,9 +491,8 @@ class MainActivity : ComponentActivity() {
     }
 
 
-
     @Composable
-    fun lottieCatAnimation () {
+    fun lottieCatAnimation() {
         val composition by rememberLottieComposition(spec =  LottieCompositionSpec.Url("https://lottie.host/dd17a01e-7918-4b5c-bf8a-0db8ddfadc47/a2dgeaC9fV.lottie"))
         LottieAnimation(composition = composition, iterations = LottieConstants.IterateForever )
     }
