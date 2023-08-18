@@ -48,6 +48,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -74,7 +75,7 @@ import java.io.IOException
 import java.util.Date
 import kotlin.math.cos
 import kotlin.math.sin
-import kotlin.random.Random
+
 
 
 class MainActivity : ComponentActivity() {
@@ -187,7 +188,7 @@ class MainActivity : ComponentActivity() {
 
 
             if (!valueNotEmpty) {
-                Toast.makeText(LocalContext.current, "Empty value is not allowed.", Toast.LENGTH_LONG).show()
+                Toast.makeText(LocalContext.current, getString(R.string.empty_input_warning_text), Toast.LENGTH_LONG).show()
             }
 
             Button(
@@ -401,77 +402,92 @@ class MainActivity : ComponentActivity() {
             verticalArrangement = Arrangement.Center
         ) {
             if (wheelName != null) {
-                Text(
-                    text = wheelName,
-                    style = MaterialTheme.typography.labelLarge,
-                    color = Color(0xFF2c2a4a),
-                    modifier = Modifier.padding(15.dp)
-                )
-            }
-            SpinWheel(
-                onClick = {
-                    scope.launch {
-                        state.animate { pieIndex ->
-                            selectedChoice.value = getString(R.string.selected_choices_text) + " "+ items[pieIndex]
-                        }
-                    }
-                },
-                state = state,
-                dimensions = SpinWheelDefaults.spinWheelDimensions(
-                    spinWheelSize = 250.dp,
-                    frameWidth = 20.dp,
-                    selectorWidth = 15.dp
-                ),
-                colors = SpinWheelDefaults.spinWheelColors(
-                    frameColor = Color(0xFF403d39),
-                    dividerColor = Color(0xFFfffcf2),
-                    selectorColor = Color(0xFFdc0073),
-                    pieColors = listOf(
-                        Color(0xFFdabfff),
-                        Color(0xFF907ad6),
-                        Color(0xFF4f518c),
-                        Color(0xFF2c2a4a),
-                        Color(0xFFffd8be),
-                        Color(0xFFffeedd),
-                        Color(0xFFf8f7ff),
-                        Color(0xFFb8b8ff),
-                        Color(0xFF9381ff),
-                        Color(0xFF8a716a),
-                        Color(0xFFc2b8b2),
-                        Color(0xFF197bbd),
-                        Color(0xFF125e8a),
-                        Color(0xFF204b57),
-                        Color(0xFF4f518c),
-                        Color(0xFF2c2a4a),
-                        Color(0xFF9381ff),
-                        Color(0xFF907ad6),
-                        Color(0xFF4f518c),
-                        Color(0xFF2c2a4a),
+                Box (modifier = Modifier
+                    .weight(1f)
+                    .padding(all = 5.dp)
+                    .fillMaxWidth()) {
+                    Text(
+                        modifier = Modifier.align(Alignment.Center),
+                        text = wheelName,
+                        color = Color(0xFF2c2a4a),
+                        fontSize = 30.sp,
+                        fontWeight = FontWeight.Bold,
                     )
-                )
-            ) { pieIndex ->
-                Icon(
-                    imageVector = iconList[pieIndex],
-                    tint = Color.White,
-                    contentDescription = null,
-                )
-
-                val angle = (360 / textList.size) * pieIndex
-                val angleInRadians = Math.toRadians(angle.toDouble())
-                val offsetModifier = Modifier.offset(
-                    x = (30).dp * cos(angleInRadians).toFloat(),
-                    y = (30).dp * sin(angleInRadians).toFloat()
-                )
-                Text(
-                    text = textList[pieIndex],
-                    style = MaterialTheme.typography.labelSmall,
-                    modifier = Modifier
-                        .align(Alignment.Center)
-                        .then(offsetModifier), // Apply the offset modifier
-                    color = Color(0XFFA2678A), // Set text color to red
-                )
-
+                }
             }
+            Box (modifier = Modifier
+                .weight(6f)
+                .padding(all = 15.dp)
+                .fillMaxWidth()) {
+                lottieConfettiAnimation()
+                SpinWheel(
+                    modifier = Modifier.align(Alignment.Center),
+                    onClick = {
+                        scope.launch {
+                            state.animate { pieIndex ->
+                                selectedChoice.value = getString(R.string.selected_choices_text) + " "+ items[pieIndex]
+                            }
+                        }
+                    },
+                    state = state,
+                    dimensions = SpinWheelDefaults.spinWheelDimensions(
+                        spinWheelSize = 250.dp,
+                        frameWidth = 20.dp,
+                        selectorWidth = 15.dp
+                    ),
+                    colors = SpinWheelDefaults.spinWheelColors(
+                        frameColor = Color(0xFF403d39),
+                        dividerColor = Color(0xFFfffcf2),
+                        selectorColor = Color(0xFFdc0073),
+                        pieColors = listOf(
+                            Color(0xFFdabfff),
+                            Color(0xFF907ad6),
+                            Color(0xFF4f518c),
+                            Color(0xFF2c2a4a),
+                            Color(0xFFffd8be),
+                            Color(0xFFffeedd),
+                            Color(0xFFf8f7ff),
+                            Color(0xFFb8b8ff),
+                            Color(0xFF9381ff),
+                            Color(0xFF8a716a),
+                            Color(0xFFc2b8b2),
+                            Color(0xFF197bbd),
+                            Color(0xFF125e8a),
+                            Color(0xFF204b57),
+                            Color(0xFF4f518c),
+                            Color(0xFF2c2a4a),
+                            Color(0xFF9381ff),
+                            Color(0xFF907ad6),
+                            Color(0xFF4f518c),
+                            Color(0xFF2c2a4a),
+                        )
+                    )
+                ) { pieIndex ->
+                    Icon(
+                        imageVector = iconList[pieIndex],
+                        tint = Color.White,
+                        contentDescription = null,
+                    )
+
+                    val angle = (360 / textList.size) * pieIndex
+                    val angleInRadians = Math.toRadians(angle.toDouble())
+                    val offsetModifier = Modifier.offset(
+                        x = (30).dp * cos(angleInRadians).toFloat(),
+                        y = (30).dp * sin(angleInRadians).toFloat()
+                    )
+                    Text(
+                        text = textList[pieIndex],
+                        style = MaterialTheme.typography.labelSmall,
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .then(offsetModifier),
+                        color = Color(0XFFA2678A),
+                    )
+
+
+                }
+            }
+
 
 
             val context = LocalContext.current
@@ -482,6 +498,8 @@ class MainActivity : ComponentActivity() {
 
 
         }
+
+
 
 
         Spacer(modifier = Modifier.height(32.dp))
@@ -496,6 +514,15 @@ class MainActivity : ComponentActivity() {
         val composition by rememberLottieComposition(spec =  LottieCompositionSpec.Url("https://lottie.host/dd17a01e-7918-4b5c-bf8a-0db8ddfadc47/a2dgeaC9fV.lottie"))
         LottieAnimation(composition = composition, iterations = LottieConstants.IterateForever )
     }
+
+
+    @Composable
+    fun lottieConfettiAnimation() {
+        val composition by rememberLottieComposition(spec =  LottieCompositionSpec.Url("https://lottie.host/ddf79e42-63d1-4cc4-84d7-d85419d7bb99/gG1WDM4X8S.lottie"))
+        LottieAnimation(composition = composition, iterations = LottieConstants.IterateForever )
+    }
+
+
 
     private fun showMessage(context: Context, message: String, view: View){
         if(message == getString(R.string.spin_wheel_notification_text)){
@@ -542,7 +569,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    //Share ScreenShot
+
     private fun shareScreenShot(imageFile: File) {
         val uri = FileProvider.getUriForFile(
             this,
@@ -552,7 +579,7 @@ class MainActivity : ComponentActivity() {
         val intent = Intent()
         intent.action = Intent.ACTION_SEND
         intent.type = "image/*"
-        intent.putExtra(Intent.EXTRA_TEXT, "Download Application from Instagram")
+        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.ImageText))
         intent.putExtra(Intent.EXTRA_STREAM, uri)
         try {
             this.startActivity(Intent.createChooser(intent, "Share With"))

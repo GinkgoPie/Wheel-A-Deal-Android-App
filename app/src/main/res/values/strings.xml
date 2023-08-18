@@ -12,6 +12,8 @@
     <string name="add_choices_label_text">Add a choice here...</string>
     <string name="selected_choices_text">Selected choice: </string>
     <string name="share_btn">Save screenshot and share</string>
+    <string name="empty_input_warning_text">Empty value is not allowed.</string>
+    <string name="ImageText">Decision made</string>
 
 
 </resources>

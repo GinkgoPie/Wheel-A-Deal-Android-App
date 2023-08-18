@@ -9,7 +9,9 @@
     <string name="wheel_name_request_text">输入转盘名字:</string>
     <string name="wheel_name_label_text">转盘:</string>
     <string name="add_choices_request_text">添加选择 </string>
-    <string name="add_choices_label_text">今晚吃什么...</string>
+    <string name="add_choices_label_text">今晚吃什么……</string>
     <string name="selected_choices_text">选中了: </string>
     <string name="share_btn">分享截图</string>
+    <string name="empty_input_warning_text">输入值不可为空</string>
+    <string name="ImageText">截图</string>
 </resources>
